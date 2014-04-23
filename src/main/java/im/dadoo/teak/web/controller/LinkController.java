@@ -8,6 +8,7 @@ package im.dadoo.teak.web.controller;
 
 import im.dadoo.teak.domain.Link;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -28,5 +29,34 @@ public class LinkController extends BaseController {
     } else {
       return "redirect:/404";
     }
+  }
+  
+  @RequestMapping(value = "/link/{id}/update", method = RequestMethod.POST)
+  public String update(@PathVariable Integer id, 
+          @RequestParam(required = false) String name,
+          @RequestParam(required = false) String url,
+          @RequestParam(required = false) String description) {
+    Link link = this.linkService.findById(id);
+    if (link != null) {
+      if (name != null) {
+        link.setName(name);
+      }
+      if (url != null) {
+        link.setUrl(url);
+      }
+      if (description != null) {
+        link.setDescription(description);
+      }
+      this.linkService.update(id, link.getName(), link.getUrl(), link.getDescription());
+      return "redirect:/admin/link";
+    } else {
+      return "redirect:/404";
+    }
+  }
+  
+  @RequestMapping(value = "/link/{id}/delete", method = RequestMethod.GET)
+  public String deleteById(@PathVariable Integer id) {
+    this.linkService.deleteById(id);
+    return "redirect:/admin/link";
   }
 }

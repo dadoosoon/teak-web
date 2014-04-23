@@ -44,7 +44,7 @@
               <td><%= DateFormatUtils.format(p.getPublishDatetime(), "yyyy-MM-dd HH:mm",TimeZone.getTimeZone("GMT+8")) %></td>
               <td>
                 <a href="/admin/page/<%= p.getId() %>/update">修改</a>
-                <a href="/admin/page/<%= p.getId() %>/delete">删除</a>
+                <a href="/page/<%= p.getId() %>/delete">删除</a>
               </td>
             </tr>
             <% } %>

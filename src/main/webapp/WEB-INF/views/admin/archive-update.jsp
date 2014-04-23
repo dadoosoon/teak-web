@@ -3,13 +3,14 @@
 <%@page import="java.util.*,im.dadoo.teak.domain.*,org.apache.commons.lang3.time.*" %>
 
 <%
+  Archive archive = (Archive)request.getAttribute("archive");
   List<Category> categories = (List<Category>)request.getAttribute("categories");
 %>
 <!DOCTYPE html>
 <html lang="zh_cn">
 <head>
   <jsp:include page="../partial/head.jsp" flush="true">
-    <jsp:param name="title" value="新增文章" />
+    <jsp:param name="title" value="修改文章" />
   </jsp:include>
   <script src="http://cdn.bootcss.com/ckeditor/4.3.2/ckeditor.js"></script>
 </head>
@@ -22,32 +23,34 @@
         <jsp:include page="partial/leftsidebar.jsp" flush="true" />
       </div>
       <div class="col-md-9">
-        <form id="new-post-form" enctype="multipart/form-data" action="/archive" method="post">
+        <form id="update-post-form" enctype="multipart/form-data" action="/archive/<%= archive.getId() %>/update" method="post">
           <div class="form-group">
             <label for="title">标题</label>
-            <input name="title" type="text" class="form-control">
+            <input name="title" type="text" class="form-control" value="<%= archive.getTitle() %>">
           </div>
           <div class="form-group">
             <label for="author">作者</label>
-            <input name="author" type="text" class="form-control">
+            <input name="author" type="text" class="form-control" value="<%= archive.getAuthor() %>">
           </div>
           <div class="form-group">
             <label for="categoryId">分类</label>
             <select name="categoryId" class="form-control">
-              <% if (categories != null) { %>
-                <% for (Category c : categories) { %>
-                  <option value="<%= c.getId() %>"><%= c.getName() %></option>
+              <% for (Category c : categories) { %>
+                <% if (c.getId().equals(archive.getCategoryId())) { %>
+                <option value="<%= c.getId() %>" selected="selected"><%= c.getName() %></option>
+                <% } else { %>
+                <option value="<%= c.getId() %>"><%= c.getName() %></option>
                 <% } %>
               <% } %>
-						</select>
+            </select>
           </div>
           <div class="form-group">
-            <label for="thumbnail">缩略图</label>
+            <label for="thumbnail">图片上传</label>
             <input type="file" name="thumbnail">
           </div>
           <div class="form-group">
             <label for="html">内容</label>
-            <textarea id="html" name="html" class="form-control" rows="10"></textarea>
+            <textarea id="html" name="html" class="form-control" rows="10"><%= archive.getHtml() %></textarea>
           </div>
           <div class="form-group">
             <button type="submit" class="btn btn-default">保存</button>

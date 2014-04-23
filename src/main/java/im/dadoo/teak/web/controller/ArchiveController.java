@@ -9,13 +9,18 @@ package im.dadoo.teak.web.controller;
 import im.dadoo.teak.domain.Archive;
 import im.dadoo.teak.domain.Category;
 import im.dadoo.teak.web.cons.Cons;
+import im.dadoo.teak.web.service.FileService;
+import java.io.IOException;
 import java.util.List;
+import javax.annotation.Resource;
+import javax.servlet.http.HttpSession;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.multipart.MultipartFile;
 
 /**
  *
@@ -23,6 +28,9 @@ import org.springframework.web.bind.annotation.RequestParam;
  */
 @Controller
 public class ArchiveController extends BaseController {
+  
+  @Resource
+  private FileService fileService;
   
   @RequestMapping(value = "/archive/{id}", method = RequestMethod.GET)
 	public String getItemPage(ModelMap map, @PathVariable Integer id) {
@@ -64,4 +72,60 @@ public class ArchiveController extends BaseController {
 			return "forward:/404";
 		}
 	}
+  
+  @RequestMapping(value = "/archive", method = RequestMethod.POST)
+  public String save(HttpSession session, @RequestParam String title, 
+			@RequestParam(required = false) String author, @RequestParam(required = false) String html,
+			@RequestParam Integer categoryId, 
+      @RequestParam(required = false) MultipartFile thumbnail) 
+          throws IllegalStateException, IOException {
+    String thumbnailPath = null;
+    if (thumbnail != null) {
+			String root = session.getServletContext().getRealPath("/");
+			thumbnailPath = this.fileService.save(thumbnail, root);
+		}
+    Archive archive = this.archiveService.save(title, author, html, thumbnailPath, categoryId);
+    if (archive != null) {
+      return "redirect:/admin/archive";
+    } else {
+      return "redirect:/404";
+    }
+  }
+  
+  @RequestMapping(value = "/archive/{id}/update", method = RequestMethod.POST)
+  public String update(HttpSession session, @PathVariable Integer id, 
+          @RequestParam(required = false) String title, 
+          @RequestParam(required = false) String author, 
+          @RequestParam(required = false) Integer categoryId, 
+          @RequestParam(required = false) String html, 
+          @RequestParam(required = false) MultipartFile thumbnail) 
+          throws IllegalStateException, IOException {
+    Archive archive = this.archiveService.findById(id);
+    if (title != null) {
+      archive.setTitle(title);
+    }
+    if (author != null) {
+      archive.setAuthor(author);
+    }
+    if (categoryId != null) {
+      archive.setCategoryId(categoryId);
+    }
+    if (html != null) {
+      archive.setHtml(html);
+    }
+    if (thumbnail != null) {
+      String root = session.getServletContext().getRealPath("/");
+			String thumbnailPath = this.fileService.save(thumbnail, root);
+      archive.setThumbnailPath(thumbnailPath);
+    }
+    this.archiveService.update(id, archive.getTitle(), archive.getAuthor(), archive.getHtml(), 
+            archive.getPublishDatetime(), archive.getThumbnailPath(), archive.getCategoryId());
+    return "redirect:/admin/archive";
+  }
+  
+  @RequestMapping(value = "/archive/{id}/delete", method = RequestMethod.GET)
+  public String delete(@PathVariable Integer id) {
+    this.archiveService.deleteById(id);
+    return "redirect:/admin/archive";
+  }
 }
