@@ -10,6 +10,7 @@ import im.dadoo.teak.domain.Page;
 import java.io.IOException;
 import javax.servlet.http.HttpSession;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -21,7 +22,18 @@ import org.springframework.web.bind.annotation.RequestParam;
  */
 @Controller
 public class PageController extends BaseController {
-          
+  
+  @RequestMapping(value = "/page/{id}", method = RequestMethod.GET)
+  public String getItemPage(@PathVariable Integer id, ModelMap map) {
+    Page page = this.pageService.findById(id);
+    if (page != null) {
+      map.addAttribute("page", page);
+      return "page-item";
+    } else {
+      return "redirect:/404";
+    }
+  } 
+  
   @RequestMapping(value = "/page", method = RequestMethod.POST)
   public String save(HttpSession session, @RequestParam String name, 
           @RequestParam String title, @RequestParam String author, 

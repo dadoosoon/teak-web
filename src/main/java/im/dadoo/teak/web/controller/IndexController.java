@@ -23,16 +23,13 @@ import org.springframework.web.bind.annotation.RequestMethod;
 @Controller
 public class IndexController extends BaseController {
   
-  @Resource
-  private PageService pageService;
-  
   @RequestMapping(value = "/", method = RequestMethod.GET)
   public String index(ModelMap map) {
     this.renderDefault(map);
     List<Archive> noticeArchives = this.archiveService.listByCategoryId(1, 0, 10);
     List<Archive> activityArchives = this.archiveService.listByCategoryId(2, 0, 10);
     List<Archive> researchArchives = this.archiveService.listByCategoryId(3, 0, 10);
-    List<Archive> imageArchives = this.archiveService.listByCategoryId(4, 0, 10);
+    List<Archive> imageArchives = this.archiveService.listByCategoryId(16, 0, 10);
     Page introductionPage = this.pageService.findById(1);
     
     map.addAttribute("noticeArchives", noticeArchives);

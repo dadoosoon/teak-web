@@ -40,7 +40,7 @@ public class ArchiveController extends BaseController {
 		if (archive != null) {
 			this.archiveService.click(id);
 			map.addAttribute("archive", archive);
-			return "post-item";
+			return "archive-item";
 		}
 		else {
 			map.addAttribute(Cons.ERROR, "无此文章");
@@ -50,22 +50,24 @@ public class ArchiveController extends BaseController {
 	
 	@RequestMapping(value = "/category/{id}", method = RequestMethod.GET)
 	public String getListPage(ModelMap map, @PathVariable Integer id,
-			@RequestParam(required = false) Integer pagecount) {
+			@RequestParam(required = false) Integer pagecount,
+      @RequestParam(required = false) Integer pagesize) {
 		if (pagecount == null) pagecount = 0;
+    if (pagesize == null) pagesize = Cons.DEFAULT_PAGE_SIZE;
 		Category category = this.categoryService.findById(id);
 		if (category != null) {
 			
 			this.renderDefault(map);
 			
-			List<Archive> archives = this.archiveService.listByCategoryId(id, pagecount, Cons.DEFAULT_PAGE_SIZE);
+			List<Archive> archives = this.archiveService.listByCategoryId(id, pagecount, pagesize);
 			map.addAttribute("category", category);
 			map.addAttribute("archives", archives);
 			map.addAttribute("pagecount", pagecount);
 //			Integer maxPagecount = 1 + 
 //					this.postService.listByCategoryId(id, 0, Integer.MAX_VALUE).size() / Cons.DEFAULT_PAGE_SIZE;
-      Integer maxPagecount = 10;
+      Integer maxPagecount = 1 + this.archiveService.sizeByCategoryId(id) / pagesize;
 			map.addAttribute("maxPagecount", maxPagecount);
-			return "list";
+			return "archive-list";
 		}
 		else {
 			map.addAttribute(Cons.ERROR, "无此分类");
@@ -113,7 +115,7 @@ public class ArchiveController extends BaseController {
     if (html != null) {
       archive.setHtml(html);
     }
-    if (thumbnail != null) {
+    if (!thumbnail.isEmpty()) {
       String root = session.getServletContext().getRealPath("/");
 			String thumbnailPath = this.fileService.save(thumbnail, root);
       archive.setThumbnailPath(thumbnailPath);
@@ -124,7 +126,7 @@ public class ArchiveController extends BaseController {
   }
   
   @RequestMapping(value = "/archive/{id}/delete", method = RequestMethod.GET)
-  public String delete(@PathVariable Integer id) {
+  public String deleteById(@PathVariable Integer id) {
     this.archiveService.deleteById(id);
     return "redirect:/admin/archive";
   }

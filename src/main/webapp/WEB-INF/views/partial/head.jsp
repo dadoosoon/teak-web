@@ -18,3 +18,13 @@
 
 <script src="http://cdn.bootcss.com/jquery/1.10.2/jquery.min.js"></script>
 <script src="http://cdn.bootcss.com/twitter-bootstrap/3.0.3/js/bootstrap.min.js"></script>
+
+<style>
+  h1,h2,h3,h4,h5,h6 {
+    font-family: 'Microsoft YaHei','WenQuanYi Micro Hei';
+    font-weight: bold;
+  }
+  a, a:link, a:active, a:hover, a:visited {
+    text-decoration: none;
+  }
+</style>
