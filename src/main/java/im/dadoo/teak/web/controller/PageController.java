@@ -34,7 +34,7 @@ public class PageController extends BaseController {
     }
   } 
   
-  @RequestMapping(value = "/page", method = RequestMethod.POST)
+  @RequestMapping(value = "/admin/page", method = RequestMethod.POST)
   public String save(HttpSession session, @RequestParam String name, 
           @RequestParam String title, @RequestParam String author, 
           @RequestParam String html) throws IllegalStateException, IOException {
@@ -46,7 +46,7 @@ public class PageController extends BaseController {
     }
   }
   
-  @RequestMapping(value = "/page/{id}/update", method = RequestMethod.POST)
+  @RequestMapping(value = "/admin/page/{id}/update", method = RequestMethod.POST)
   public String update(HttpSession session, @PathVariable Integer id,
           @RequestParam(required = false) String name, 
           @RequestParam(required = false) String title, 
@@ -70,7 +70,7 @@ public class PageController extends BaseController {
     return "redirect:/admin/page";
   }
   
-  @RequestMapping(value = "/page/{id}/delete", method = RequestMethod.GET)
+  @RequestMapping(value = "/admin/page/{id}/delete", method = RequestMethod.GET)
   public String deleteById(@PathVariable Integer id) {
     System.out.println(id);
     this.pageService.deleteById(id);

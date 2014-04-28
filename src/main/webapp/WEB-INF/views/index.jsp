@@ -22,7 +22,7 @@
   <div class="container">
     <div class="row">
       <div class="col-md-8">
-        <div class="board" style="margin-top: 30px">
+        <div class="board">
           <div class="board-head" style="padding:1px 0px;border-bottom:3px solid #3DBAF4 ">
             <h3>
               <a href="/category/16" style="color:#3DBAF4">图片新闻</a>
@@ -54,7 +54,7 @@
         </div>
       </div>
       <div class="col-md-4">
-        <div class="board" style="margin-top: 30px">
+        <div class="board">
           <div class="board-head" style="padding:1px 0px;border-bottom: 3px solid #58B329">
             <h3>
               <a href="/page/1" style="color:#58B329">中心介绍</a>
@@ -82,8 +82,8 @@
                 <tbody>
                   <% for (Archive archive : latestArchives) { %>
                   <tr>
-                    <td class="col-md-5"><img src="/resources/img/list-item.gif" style="margin-right:10px"><a href="/archive/<%= archive.getId() %>" style="color:#FF8F3F"><%= archive.getTitle() %></a></td>
-                    <td class="col-md-2"><%= DateFormatUtils.format(archive.getPublishDatetime(), "MM-dd",TimeZone.getTimeZone("GMT+8")) %></td>
+                    <td class="col-md-6"><img src="/resources/img/list-item.gif" style="margin-right:10px"><a href="/archive/<%= archive.getId() %>" style="color:#FF8F3F"><%= archive.getTitle() %></a></td>
+                    <td class="col-md-1"><%= DateFormatUtils.format(archive.getPublishDatetime(), "MM-dd",TimeZone.getTimeZone("GMT+8")) %></td>
                     <td class="col-md-1"><span class="badge pull-right"><%= archive.getClick() %></span></td>
                   </tr>
                   <% } %>
@@ -111,7 +111,7 @@
       </div>
     </div>
   </div>
-
+  <jsp:include page="partial/footer.jsp" flush="true" />
   <script>
     $(function() {
       $(".item:first").addClass("active");

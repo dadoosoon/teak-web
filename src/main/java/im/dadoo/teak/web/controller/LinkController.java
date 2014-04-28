@@ -20,7 +20,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 @Controller
 public class LinkController extends BaseController {
   
-  @RequestMapping(value = "/link", method = RequestMethod.POST)
+  @RequestMapping(value = "/admin/link", method = RequestMethod.POST)
   public String save(@RequestParam String name, @RequestParam String url, 
           @RequestParam(required = false) String description) {
     Link link = this.linkService.save(name, url, description);
@@ -31,7 +31,7 @@ public class LinkController extends BaseController {
     }
   }
   
-  @RequestMapping(value = "/link/{id}/update", method = RequestMethod.POST)
+  @RequestMapping(value = "/admin/link/{id}/update", method = RequestMethod.POST)
   public String update(@PathVariable Integer id, 
           @RequestParam(required = false) String name,
           @RequestParam(required = false) String url,
@@ -54,7 +54,7 @@ public class LinkController extends BaseController {
     }
   }
   
-  @RequestMapping(value = "/link/{id}/delete", method = RequestMethod.GET)
+  @RequestMapping(value = "/admin/link/{id}/delete", method = RequestMethod.GET)
   public String deleteById(@PathVariable Integer id) {
     this.linkService.deleteById(id);
     return "redirect:/admin/link";

@@ -20,7 +20,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 @Controller
 public class CategoryController extends BaseController {
   
-  @RequestMapping(value = "/category", method = RequestMethod.POST)
+  @RequestMapping(value = "/admin/category", method = RequestMethod.POST)
   public String save(@RequestParam String name, 
           @RequestParam(required = false) String description) {
     Category category = this.categoryService.save(name, description);
@@ -31,7 +31,7 @@ public class CategoryController extends BaseController {
     }
   }
   
-  @RequestMapping(value = "/category/{id}/update", method = RequestMethod.POST)
+  @RequestMapping(value = "/admin/category/{id}/update", method = RequestMethod.POST)
   public String update(@PathVariable Integer id, 
           @RequestParam(required = false) String name, 
           @RequestParam(required = false) String description) {

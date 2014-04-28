@@ -11,7 +11,9 @@ import im.dadoo.teak.core.service.CategoryService;
 import im.dadoo.teak.core.service.LinkService;
 import im.dadoo.teak.core.service.PageService;
 import im.dadoo.teak.domain.Archive;
+import im.dadoo.teak.domain.Category;
 import im.dadoo.teak.domain.Link;
+import im.dadoo.teak.domain.Page;
 import im.dadoo.teak.domain.User;
 import im.dadoo.teak.web.cons.Cons;
 import java.util.List;
@@ -47,6 +49,13 @@ public class BaseController {
 		map.addAttribute("links", links);
 	}
 	
+  protected void renderNav(ModelMap map) {
+    List<Category> categories = this.categoryService.list();
+    List<Page> pages = this.pageService.list();
+    map.addAttribute("categoryNav", categories);
+    map.addAttribute("pageNav", pages);
+  }
+  
 	protected void renderLatestArchives(ModelMap map) {
 		List<Archive> latestArchives = this.archiveService.list(20);
 		map.addAttribute("latestArchives", latestArchives);

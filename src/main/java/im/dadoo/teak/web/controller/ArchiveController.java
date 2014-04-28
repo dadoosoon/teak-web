@@ -63,8 +63,6 @@ public class ArchiveController extends BaseController {
 			map.addAttribute("category", category);
 			map.addAttribute("archives", archives);
 			map.addAttribute("pagecount", pagecount);
-//			Integer maxPagecount = 1 + 
-//					this.postService.listByCategoryId(id, 0, Integer.MAX_VALUE).size() / Cons.DEFAULT_PAGE_SIZE;
       Integer maxPagecount = 1 + this.archiveService.sizeByCategoryId(id) / pagesize;
 			map.addAttribute("maxPagecount", maxPagecount);
 			return "archive-list";
@@ -75,7 +73,7 @@ public class ArchiveController extends BaseController {
 		}
 	}
   
-  @RequestMapping(value = "/archive", method = RequestMethod.POST)
+  @RequestMapping(value = "/admin/archive", method = RequestMethod.POST)
   public String save(HttpSession session, @RequestParam String title, 
 			@RequestParam(required = false) String author, @RequestParam(required = false) String html,
 			@RequestParam Integer categoryId, 
@@ -94,7 +92,7 @@ public class ArchiveController extends BaseController {
     }
   }
   
-  @RequestMapping(value = "/archive/{id}/update", method = RequestMethod.POST)
+  @RequestMapping(value = "/admin/archive/{id}/update", method = RequestMethod.POST)
   public String update(HttpSession session, @PathVariable Integer id, 
           @RequestParam(required = false) String title, 
           @RequestParam(required = false) String author, 
@@ -125,7 +123,7 @@ public class ArchiveController extends BaseController {
     return "redirect:/admin/archive";
   }
   
-  @RequestMapping(value = "/archive/{id}/delete", method = RequestMethod.GET)
+  @RequestMapping(value = "/admin/archive/{id}/delete", method = RequestMethod.GET)
   public String deleteById(@PathVariable Integer id) {
     this.archiveService.deleteById(id);
     return "redirect:/admin/archive";

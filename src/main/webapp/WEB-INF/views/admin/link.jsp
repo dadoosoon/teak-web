@@ -41,7 +41,7 @@
                 <td><%= link.getDescription() %></td>
                 <td>
                   <a href="/admin/link/<%= link.getId() %>/update">修改</a>
-                  <a href="/link/<%= link.getId() %>/delete">删除</a>
+                  <a href="/admin/link/<%= link.getId() %>/delete">删除</a>
                 </td>
               </tr>
               <% } %>

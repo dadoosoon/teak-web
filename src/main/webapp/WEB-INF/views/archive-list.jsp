@@ -46,6 +46,7 @@
             </ul>
           </div>
         </div>
+        <jsp:include page="partial/pagination.jsp" flush="true" />
       </div>
       <div class="col-md-4">
         

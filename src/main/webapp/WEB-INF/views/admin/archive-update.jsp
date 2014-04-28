@@ -23,7 +23,7 @@
         <jsp:include page="partial/leftsidebar.jsp" flush="true" />
       </div>
       <div class="col-md-9">
-        <form id="update-post-form" enctype="multipart/form-data" action="/archive/<%= archive.getId() %>/update" method="post">
+        <form id="update-post-form" enctype="multipart/form-data" action="/admin/archive/<%= archive.getId() %>/update" method="post">
           <div class="form-group">
             <label for="title">标题</label>
             <input name="title" type="text" class="form-control" value="<%= archive.getTitle() %>">
