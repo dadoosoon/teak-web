@@ -21,5 +21,6 @@
       </div>
     </div>
   </div>
+  <jsp:include page="../partial/footer.jsp" flush="true" />
 </body>
 </html>

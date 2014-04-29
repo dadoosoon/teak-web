@@ -16,7 +16,7 @@
 </head>
 <body>
   <jsp:include page="partial/header.jsp" flush="true" />
-  
+  <jsp:include page="partial/nav.jsp" flush="true" />
   <div class="container">
     <div class="row">
       <div class="col-md-8">
@@ -38,6 +38,6 @@
       </div>
     </div>
   </div>
-
+  <jsp:include page="partial/footer.jsp" flush="true" />
 </body>
 </html>

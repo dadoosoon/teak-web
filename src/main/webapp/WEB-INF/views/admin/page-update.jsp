@@ -46,6 +46,7 @@
       </div>
     </div>
   </div>
+  <jsp:include page="../partial/footer.jsp" flush="true" />
   <script>
     $("#admin-page-li").addClass("active");
     CKEDITOR.replace("html",{

@@ -51,6 +51,7 @@
       </div>
     </div>
   </div>
+  <jsp:include page="../partial/footer.jsp" flush="true" />
   <script>
     $("#admin-link-li").addClass("active");
   </script>

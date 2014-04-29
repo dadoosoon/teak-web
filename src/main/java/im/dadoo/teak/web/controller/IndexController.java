@@ -6,11 +6,9 @@
 
 package im.dadoo.teak.web.controller;
 
-import im.dadoo.teak.core.service.PageService;
 import im.dadoo.teak.domain.Archive;
 import im.dadoo.teak.domain.Page;
 import java.util.List;
-import javax.annotation.Resource;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -27,7 +25,7 @@ public class IndexController extends BaseController {
   public String index(ModelMap map) {
     this.renderDefault(map);
     this.renderNav(map);
-    List<Archive> imageArchives = this.archiveService.listByCategoryId(16, 0, 10);
+    List<Archive> imageArchives = this.archiveService.listByCategoryId(4, 0, 10);
     Page introductionPage = this.pageService.findById(1);
     
 		map.addAttribute("imageArchives", imageArchives);

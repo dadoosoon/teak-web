@@ -27,19 +27,22 @@ import org.springframework.web.bind.annotation.RequestParam;
 public class AdminController extends BaseController {
   
   @RequestMapping(value = "/admin", method = RequestMethod.GET)
-  public String getAdminPage() {
+  public String getAdminPage(ModelMap map) {
+    this.renderNav(map);
     return "admin/admin";
   }
   
   @RequestMapping(value = "/admin/category", method = RequestMethod.GET)
   public String getAdminCategoryPage(ModelMap map) {
+    this.renderNav(map);
     List<Category> categories = this.categoryService.list();
     map.addAttribute("categories", categories);
     return "admin/category";
   }
   
   @RequestMapping(value = "/admin/category/add", method = RequestMethod.GET)
-  public String getAdminCategoryAddPage() {
+  public String getAdminCategoryAddPage(ModelMap map) {
+    this.renderNav(map);
     return "admin/category-add";
   }
   
@@ -47,6 +50,7 @@ public class AdminController extends BaseController {
   public String getAdminCategoryUpdatePage(ModelMap map, @PathVariable Integer id) {
     Category category = this.categoryService.findById(id);
     if (category != null) {
+      this.renderNav(map);
       map.addAttribute("category", category);
       return "admin/category-update";
     } else {
@@ -56,13 +60,15 @@ public class AdminController extends BaseController {
   
   @RequestMapping(value = "/admin/link", method = RequestMethod.GET)
   public String getAdminLinkPage(ModelMap map) {
+    this.renderNav(map);
     List<Link> links = this.linkService.list();
     map.addAttribute("links", links);
     return "admin/link";
   }
   
   @RequestMapping(value = "/admin/link/add", method = RequestMethod.GET)
-  public String getAdminLinkAddPage() {
+  public String getAdminLinkAddPage(ModelMap map) {
+    this.renderNav(map);
     return "admin/link-add";
   }
   
@@ -70,6 +76,7 @@ public class AdminController extends BaseController {
   public String getAdminLinkUpdatePage(ModelMap map, @PathVariable Integer id) {
     Link link = this.linkService.findById(id);
     if (link != null) {
+      this.renderNav(map);
       map.addAttribute("link", link);
       return "admin/link-update";
     } else {
@@ -81,6 +88,8 @@ public class AdminController extends BaseController {
   public String getAdminArchivePage(ModelMap map, 
           @RequestParam(required = false) Integer pagecount,
           @RequestParam(required = false) Integer pagesize) {
+    
+    this.renderNav(map);
     if (pagecount == null || pagesize == null) {
       pagecount = 0;
       pagesize = 30;
@@ -94,6 +103,7 @@ public class AdminController extends BaseController {
   
   @RequestMapping(value = "/admin/archive/add", method = RequestMethod.GET)
   public String getAdminArchiveAddPage(ModelMap map) {
+    this.renderNav(map);
     List<Category> categories = this.categoryService.list();
     map.addAttribute("categories", categories);
     return "admin/archive-add";
@@ -103,6 +113,7 @@ public class AdminController extends BaseController {
   public String getAdminArchiveUpdatePage(ModelMap map, @PathVariable Integer id) {
     Archive archive = this.archiveService.findById(id);
     if (archive != null) {
+      this.renderNav(map);
       List<Category> categories = this.categoryService.list();
       map.addAttribute("archive", archive);
       map.addAttribute("categories", categories);
@@ -114,13 +125,15 @@ public class AdminController extends BaseController {
   
   @RequestMapping(value = "/admin/page", method = RequestMethod.GET)
   public String getAdminPagePage(ModelMap map) {
+    this.renderNav(map);
     List<Page> pages = this.pageService.list();
     map.addAttribute("pages", pages);
     return "admin/page";
   }
   
   @RequestMapping(value = "/admin/page/add", method = RequestMethod.GET)
-  public String getAdminPageAddPage() {
+  public String getAdminPageAddPage(ModelMap map) {
+    this.renderNav(map);
     return "admin/page-add";
   }
   
@@ -128,6 +141,7 @@ public class AdminController extends BaseController {
   public String getAdminPageUpdatePage(ModelMap map, @PathVariable Integer id) {
     Page page = this.pageService.findById(id);
     if (page != null) {
+      this.renderNav(map);
       map.addAttribute("page", page);
       return "admin/page-update";
     } else {

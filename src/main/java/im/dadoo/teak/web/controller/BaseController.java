@@ -57,7 +57,7 @@ public class BaseController {
   }
   
 	protected void renderLatestArchives(ModelMap map) {
-		List<Archive> latestArchives = this.archiveService.list(20);
+		List<Archive> latestArchives = this.archiveService.list(10);
 		map.addAttribute("latestArchives", latestArchives);
 	}
 	

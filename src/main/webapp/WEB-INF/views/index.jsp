@@ -34,7 +34,7 @@
                 <% for (Archive archive : imageArchives) { %>
                   <div class="item">
                     <div>
-                      <img src="<%= archive.getThumbnailPath() %>" style="width:300px;height:300px">
+                      <img src="<%= archive.getThumbnailPath() %>" style="width:250px;height:250px">
                     </div>
                     <div class="carousel-caption">
                       <h3><a href="/archive/<%= archive.getId() %>"><%= archive.getTitle() %></a></h3>
@@ -62,7 +62,7 @@
           </div>
           <div class="board-body">
             <div style="margin:20px 10px;color:#58B329">
-              <%= introductionPage.getText().substring(0, 310) %>...<a href="/page/<%= introductionPage.getId() %>">显示全文</a>
+              <%= introductionPage.getText().substring(0, 265) %>...<a href="/page/<%= introductionPage.getId() %>">显示全文</a>
             </div>
           </div>
         </div>
@@ -70,7 +70,7 @@
     </div>
     <div class="row">
       <div class="col-md-8">
-        <div class="board" style="margin-top: 30px">
+        <div class="board">
           <div class="board-head" style="padding:1px 0px;border-bottom:3px solid #FF8F3F">
             <h3 style="color:#FF8F3F">
               最新动态
@@ -81,7 +81,7 @@
               <table>
                 <tbody>
                   <% for (Archive archive : latestArchives) { %>
-                  <tr>
+                  <tr style="border-bottom: 1px dotted #b7b7b7">
                     <td class="col-md-6"><img src="/resources/img/list-item.gif" style="margin-right:10px"><a href="/archive/<%= archive.getId() %>" style="color:#FF8F3F"><%= archive.getTitle() %></a></td>
                     <td class="col-md-1"><%= DateFormatUtils.format(archive.getPublishDatetime(), "MM-dd",TimeZone.getTimeZone("GMT+8")) %></td>
                     <td class="col-md-1"><span class="badge pull-right"><%= archive.getClick() %></span></td>
@@ -94,7 +94,7 @@
         </div>
       </div>
       <div class="col-md-4">
-        <div class="board" style="margin-top: 30px">
+        <div class="board">
           <div class="board-head" style="padding:1px 0px;border-bottom: 3px solid #5F1885">
             <h3 style="color:#5F1885">
               友情链接
@@ -103,7 +103,7 @@
           <div class="board-body">
             <div style="margin:20px 10px">
               <% for (Link link : links) { %>
-              <h5><img src="<%= link.getUrl() %>/favicon.ico" height="15px" width="15px">&nbsp;<a href="<%= link.getUrl() %>" style="color:#5F1885"><%= link.getName() %></a></h5>
+                <h5><img src="<%= link.getUrl() %>/favicon.ico" height="15px" width="15px">&nbsp;<a href="<%= link.getUrl() %>" style="color:#5F1885"><%= link.getName() %></a></h5>
               <% } %>
             </div>
           </div>

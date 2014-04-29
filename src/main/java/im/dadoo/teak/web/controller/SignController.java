@@ -12,6 +12,7 @@ import im.dadoo.teak.web.cons.Cons;
 import javax.annotation.Resource;
 import javax.servlet.http.HttpSession;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -27,8 +28,9 @@ public class SignController extends BaseController {
   private SignService signService;
   
   @RequestMapping(value = "/signin", method = RequestMethod.GET)
-	public String getSigninPage(HttpSession session) {
+	public String getSigninPage(HttpSession session, ModelMap map) {
 		if (this.getVisitor(session) == null) {
+      this.renderNav(map);
 			return "signin";
 		}
 		else {

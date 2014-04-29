@@ -56,6 +56,7 @@
       </div>
     </div>
   </div>
+  <jsp:include page="../partial/footer.jsp" flush="true" />
   <script>
     $("#admin-archive-li").addClass("active");
   </script>

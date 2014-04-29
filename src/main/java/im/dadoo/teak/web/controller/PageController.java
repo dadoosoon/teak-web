@@ -25,6 +25,7 @@ public class PageController extends BaseController {
   
   @RequestMapping(value = "/page/{id}", method = RequestMethod.GET)
   public String getItemPage(@PathVariable Integer id, ModelMap map) {
+    this.renderNav(map);
     Page page = this.pageService.findById(id);
     if (page != null) {
       map.addAttribute("page", page);

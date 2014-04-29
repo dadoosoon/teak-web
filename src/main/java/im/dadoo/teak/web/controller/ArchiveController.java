@@ -34,7 +34,7 @@ public class ArchiveController extends BaseController {
   
   @RequestMapping(value = "/archive/{id}", method = RequestMethod.GET)
 	public String getItemPage(ModelMap map, @PathVariable Integer id) {
-		
+		this.renderNav(map);
 		this.renderDefault(map);
 		Archive archive = this.archiveService.findById(id);
 		if (archive != null) {
@@ -52,11 +52,12 @@ public class ArchiveController extends BaseController {
 	public String getListPage(ModelMap map, @PathVariable Integer id,
 			@RequestParam(required = false) Integer pagecount,
       @RequestParam(required = false) Integer pagesize) {
-		if (pagecount == null) pagecount = 0;
+		
+    if (pagecount == null) pagecount = 0;
     if (pagesize == null) pagesize = Cons.DEFAULT_PAGE_SIZE;
 		Category category = this.categoryService.findById(id);
 		if (category != null) {
-			
+			this.renderNav(map);
 			this.renderDefault(map);
 			
 			List<Archive> archives = this.archiveService.listByCategoryId(id, pagecount, pagesize);

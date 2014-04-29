@@ -7,7 +7,13 @@
   List<Page> pageNav = (List<Page>)request.getAttribute("pageNav");
 %>
 
-<div class="navbar navbar-inverse" role="navigation" style="margin-top:20px">
+<style>
+  .navbar-inverse .navbar-nav li a {
+    color:white;
+    font-weight: bold;
+  }
+</style>
+<div class="navbar navbar-inverse" role="navigation" style="background-color: #368ee0;border-color:transparent">
   <div class="container">
     <div class="collapse navbar-collapse">
       <ul class="nav navbar-nav">
@@ -19,7 +25,7 @@
         <% } %>
         <% if (pageNav != null) { %>
           <% for (Page p : pageNav) { %>
-            <li><a href="/page/<%= p.getId() %>"><%= p.getTitle() %></a></li>
+            <li><a href="/page/<%= p.getId() %>"><%= p.getName() %></a></li>
           <% } %>
         <% } %>
       </ul>

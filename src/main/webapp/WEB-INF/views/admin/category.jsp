@@ -48,6 +48,7 @@
       </div>
     </div>
   </div>
+  <jsp:include page="../partial/footer.jsp" flush="true" />
   <script>
     $("#admin-category-li").addClass("active");
   </script>
