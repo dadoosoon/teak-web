@@ -25,7 +25,7 @@
         <div class="board">
           <div class="board-head" style="padding:1px 0px;border-bottom:3px solid #3DBAF4 ">
             <h3>
-              <a href="/category/16" style="color:#3DBAF4">图片新闻</a>
+              <a href="/category/4" style="color:#3DBAF4">图片新闻</a>
             </h3>
           </div>
           <div class="board-body">
@@ -34,9 +34,9 @@
                 <% for (Archive archive : imageArchives) { %>
                   <div class="item">
                     <div>
-                      <img src="<%= archive.getThumbnailPath() %>" style="width:250px;height:250px">
+                      <img src="<%= archive.getThumbnailPath() %>" style="width:400px;height:250px">
                     </div>
-                    <div class="carousel-caption">
+                    <div class="carousel-caption" style="left:0%;right:0%;padding-bottom:0px">
                       <h3><a href="/archive/<%= archive.getId() %>"><%= archive.getTitle() %></a></h3>
                       <div style="color:#3DBAF4"><%= archive.getText() %></div>
                     </div>
